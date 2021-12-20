@@ -1,20 +1,45 @@
+// Language used: C++
+// Author name: SD
+
 class Solution {
 public:
     int maxSubArray(vector<int>& nums) {
-        int ans = nums[0];
+        return BestSubArray(0, nums.size()-1, nums);
+    }
+    
+    int BestSubArray(int left, int right, vector<int>& nums){
         
-        int len = nums.size();
-        int coun = 0;
-
-        for(int i = 0; i < len; i++){
+        if(left > right) return INT_MIN;
+        
+        int mid = (left + right) / 2;
+        
+        int leftSum = BestSubArray(left, mid-1, nums);
+        int rightSum = BestSubArray(mid+1, right, nums);
+        
+        int midSum = nums[mid];
+        
+        int lSum =0, rSum =0, cur = 0;
+        
+        for(int i = mid-1; i >= left; i--){
+            cur += nums[i];
             
-            coun += nums[i];
-            
-            ans = max(coun, ans);
-            
-            if(coun < 0)coun = 0;
+            lSum = max(lSum, cur);
         }
         
-        return ans;
+        cur =0;
+        
+         for(int i = mid+1; i <= right; i++){
+            cur += nums[i];
+            
+            rSum = max(rSum, cur);
+        }
+       
+        midSum += (lSum + rSum);
+        
+        return max(midSum, max(leftSum, rightSum));
     }
+    
 };
+
+// Time Complexity: O(N * logN) here N is the size of nums array
+// Space Complexity: O(logN)
