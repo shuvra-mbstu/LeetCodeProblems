@@ -17,7 +17,6 @@ public:
         int x = diameter(root);
 
         return ans;
-        
     }
     
     int diameter(TreeNode* root){
@@ -33,7 +32,6 @@ public:
         
         ans = max(left + right, ans);
         
-        // cout<<ans<<" "<<root->val<<" "<<left<<" "<<right<<endl;
         return max(left, right);
     }
 };
