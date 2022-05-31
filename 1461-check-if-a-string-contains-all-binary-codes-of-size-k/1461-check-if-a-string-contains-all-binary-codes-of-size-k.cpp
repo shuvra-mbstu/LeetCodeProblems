@@ -4,7 +4,7 @@ public:
       int len = s.size();
       
       if(len<k) return false;
-      set<string> ss;
+      unordered_set<string> ss;
       
       for(int i=0; i<len-k+1; i++){
         string a = s.substr(i, k);
