@@ -16,7 +16,7 @@ public:
       
       // cout<<endl<<val;
       
-      return ss.size() >= val ? true : false;
+      return ss.size() == val ? true : false;
       
     }
 };
