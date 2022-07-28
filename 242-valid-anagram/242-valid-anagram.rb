@@ -1,16 +1,15 @@
-class Solution {
-public:
-    bool isAnagram(string s, string t) {
-      if(s.size()!=t.size())return false;
-
-      sort(s.begin(), s.end());
-      sort(t.begin(), t.end());
-            
-      int i=0, j=0;
-      for(; i<t.size() && j<s.size(); i++, j++){
-        if(s[j]!=t[i])return false;
-      }
-      
-      return true;
-    }
-};
+# @param {String} s
+# @param {String} t
+# @return {Boolean}
+def is_anagram(s, t)
+  
+    return false if s.size !=t.size
+  x = s.chars.sort.join
+  y = t.chars.sort.join
+  
+  for i in 0..x.length do
+    return false if x[i]!= y[i]
+  end
+  
+  return true
+end
