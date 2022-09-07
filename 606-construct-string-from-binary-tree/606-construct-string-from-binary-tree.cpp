@@ -13,39 +13,26 @@ class Solution {
 public:
     string tree2str(TreeNode* root) {
       if(root == NULL) return "";
-
-      string ans = to_string(root->val);
-        if(root->left == NULL && root->right == NULL) return ans;
       
-        if(root->left != NULL){
-          ans += childtree(root->left);
-        }
-      else ans += "()";
-      
-      if(root->right != NULL){
-          ans += childtree(root->right);
-        }
-      
-      return ans;
+      return childtree(root);
     }
   
   string childtree(TreeNode* root){
-    if(root == NULL) return "()";
+    if(root == NULL) return "";
       
-        string st ="";
+        string st = to_string(root->val);
       
-      st += '(' + to_string(root->val);
-    if(root->left == NULL && root->right == NULL) return st + ')';
 
           if(root->left != NULL){
-            st += childtree(root->left);
+            st += '(' + childtree(root->left) + ')';
           }
-          else st += "()";
 
       if(root->right != NULL){
-            st += childtree(root->right);
+        
+        if(!root->left) st += "()";
+        
+        st += '(' + childtree(root->right) + ')';
       }
-      st += ')';
       
       return st;
   }
