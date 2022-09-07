@@ -33,7 +33,6 @@ public:
         
         st += '(' + childtree(root->right) + ')';
       }
-      
       return st;
   }
 };
