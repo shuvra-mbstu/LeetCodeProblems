@@ -1,18 +1,16 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        stringstream ss(s);
-      string x, ans="";
+     int len = s.size(), last=0;
       
-      while(ss>>x){
-        
-        if(ans != ""){
-          ans += ' ';
+      for(int i=0; i<=len; i++){
+        if(s[i]== ' ' || i == len){
+          reverse(s.begin()+last,s.begin()+i);
+          // cout<<s<<" ";//<<s.begin()+last+1<<" "<<s.begin()+i<<endl;
+          last = i + 1;
         }
-        
-        reverse(x.begin(), x.end());
-        ans += x;
       }
-      return ans;
+
+      return s;
     }
 };
