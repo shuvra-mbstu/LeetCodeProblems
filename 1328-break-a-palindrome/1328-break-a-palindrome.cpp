@@ -17,12 +17,7 @@ public:
         }
       }
 
-      for(int i=len-1; i>second_half; i--){
-        if(palindrome[i] != 'b'){
-          palindrome[i] = 'b';
-          return palindrome;
-        }
-      }
+      palindrome[len-1] = 'b';
       
       return palindrome;
     }
