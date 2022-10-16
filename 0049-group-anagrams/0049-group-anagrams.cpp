@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
       vector<vector<string>> anagrams;
-        map<string, vector<string>> anagram_map;
+        unordered_map<string, vector<string>> anagram_map;
       
       int len = strs.size();
       
