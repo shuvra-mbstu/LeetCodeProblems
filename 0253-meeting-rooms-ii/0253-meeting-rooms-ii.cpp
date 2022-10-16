@@ -10,7 +10,9 @@ public:
       sort(intervals.begin(), intervals.end());
       int len = intervals.size();
       int count =1;
-    priority_queue<int, vector<int>, std::greater<int>> priority;
+      
+//       MinHeap priority queue syntax
+    priority_queue<int, vector<int>, greater<int>> priority;
       
       priority.push(intervals[0][1]);
       
