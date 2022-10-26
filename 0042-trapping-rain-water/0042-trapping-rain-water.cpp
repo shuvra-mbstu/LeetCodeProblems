@@ -1,29 +1,25 @@
 class Solution {
 public:
-    int trap(vector<int>& height) {
+    int trap(vector<int>& hei) {
+        int lef_max=hei[0];
+        int rig_max=hei[hei.size()-1];
         
-	int ans =0, lo =0, hi = height.size()-1, loMax=height[0], hiMax = height[hi];
-
-	while(lo <hi){
-		if(height[lo] <height[hi]){
-			if(loMax <= height[lo]){
-				loMax = height[lo];
-			}
-			else{
-			  ans += loMax - height[lo];
-		  }
-      lo++;
+        int ans=0;
+        int i=1,j=hei.size()-1;
+        while(i<=j){
+            lef_max=max(lef_max,hei[i]);
+            rig_max=max(rig_max,hei[j]);
+            
+            if(lef_max<rig_max){
+                ans+=(lef_max-hei[i]);
+                i++;
+            }
+            else{
+                ans+=(rig_max-hei[j]);
+                j--;
+            }
+        }
+        return ans;
     }
-		else{
-			if(hiMax <= height[hi]){
-				hiMax = height[hi];
-			}
-			else{
-			ans += hiMax - height[hi];
-		  }
-      hi--;
-	  }
-  }
-  return ans;
-  }
+  
 };
