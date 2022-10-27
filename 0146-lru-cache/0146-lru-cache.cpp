@@ -1,41 +1,45 @@
 class LRUCache {
 public:
     list<int> dq;
-    map<int, list<int> ::iterator> mpp;
+    map<int, list<int> :: iterator> mpp;
+    int maxsize;
     map<int, int> res;
-  
-  int max_s, count;
+
     LRUCache(int capacity) {
-        max_s = capacity;
+        maxsize = capacity;
     }
     
     int get(int key) {
-        if(mpp.find(key)==mpp.end())return -1;
-      
-            dq.erase(mpp[key]);
-      dq.push_front(key);
-      mpp[key]=dq.begin();
-      return res[key];
+        if(mpp.find(key)==mpp.end()) return -1;
+        
+        dq.erase(mpp[key]);
+        dq.push_front(key);
+        mpp[key]=dq.begin();
+        
+        return res[key];
     }
     
     void put(int key, int value) {
+        
         if(mpp.find(key)==mpp.end()){
-          if(dq.size() == max_s){
-            
-            int last = dq.back();
-            dq.pop_back();
-            mpp.erase(last);
-          }
+            if(dq.size()==maxsize){
+                
+                int last = dq.back();
+                dq.pop_back();
+                mpp.erase(last);
+            }
         }
-      else{
-        dq.erase(mpp[key]);
-      }
-      
-      dq.push_front(key);
-      mpp[key]=dq.begin();
-      res[key]=value;
+        else{
+            dq.erase(mpp[key]);
+        }
+        
+        dq.push_front(key);
+        mpp[key] = dq.begin();
+        res[key] = value;
     }
 };
+
+
 
 /**
  * Your LRUCache object will be instantiated and called as such:
