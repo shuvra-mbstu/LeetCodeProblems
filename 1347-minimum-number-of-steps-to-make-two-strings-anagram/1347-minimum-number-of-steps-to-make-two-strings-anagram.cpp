@@ -1,23 +1,26 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        map<char, int> ss, tt;
+        int count[27] = {0};
         
         int len = s.size();
         
         for(int i=0; i<len; i++){
-            ss[s[i]]++;
-            tt[t[i]]++;
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
         }
         
-        int count=0;
-        for(auto c:ss){
+        int res=0;
+        for(int c=0; c<27; c++){
             // cout<< c.first<<" "<<c.second<<endl;
-            if(c.second >tt[c.first]){
-                count += (c.second-tt[c.first]);
-            }
+            // if(c.second >tt[c.first]){
+            //     count += (c.second-tt[c.first]);
+            // }
+            
+            if(count[c]>0)
+            res += count[c];
         }
         
-        return count;
+        return res;
     }
 };
