@@ -2,7 +2,7 @@ class Solution {
 public:
     int findLeastNumOfUniqueInts(vector<int>& arr, int k) {
         map<int, int> mpp;
-        vector<int> res;
+        vector<int> heap;
 
         int len = arr.size();
         
@@ -15,19 +15,23 @@ public:
         // sort(mpp.begin(), mpp.end());
         
         int count=0, num=0;
-        for(auto i : mpp){
-            res.push_back(i.second);
+        for(auto &i : mpp){
+            heap.push_back(i.second);
         }
         
-        sort(res.begin(), res.end());
+        // sort(res.begin(), res.end());
+        make_heap(begin(heap),end(heap), greater<int>());
         
-        int i=0;
-        for(;i<res.size(); i++){
-            if(count + res[i]>k)break;
+        while(k>0){
+            k -= heap.front();
             
-            count += res[i];
-            // cout<<count<<endl;
+                             pop_heap(begin(heap), end(heap), greater<int>()); 
+
+            if(k>=0)heap.pop_back();
+            
         }
-        return res.size() - i;
+            
+            // cout<<count<<endl;
+        return heap.size();
     }
 };
