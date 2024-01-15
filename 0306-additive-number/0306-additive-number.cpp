@@ -1,9 +1,11 @@
 class Solution {
 public:
     
-    bool helper(string& str, int i, int n, vector<long long>& ans)
+    bool helper(string& str, int i, vector<long long>& ans)
     {
         // base case, if we have reached the end of str and ans.size() >= 3, than return true
+        
+        int n = str.size();
         
         if(i == n && ans.size() >= 3)
             return true;
@@ -36,7 +38,7 @@ public:
             {
                 ans.push_back(num);
                 
-                if(helper(str, j + 1, n, ans))
+                if(helper(str, j + 1, ans))
                     return true;
                 
                 // if added num doesn't lead to ans then backtrack
@@ -55,6 +57,6 @@ public:
         
         vector<long long> ans;
         
-        return helper(str, 0, n, ans);
+        return helper(str, 0, ans);
     }
 };
