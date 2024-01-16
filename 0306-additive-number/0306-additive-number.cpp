@@ -13,7 +13,9 @@ public:
         for(int i=ind; i<len; i++){
             num1 = num1 * (long) 10 + (long) (num[i]-'0');
             
-                    if(num[ind]== '0' && i>ind) return false;
+            if(num1 > LLONG_MAX)return false;
+            
+            if(num[ind]== '0' && i>ind) return false;
 
             
             if(res_l < 2 || res.back() + res[res_l-2] == num1){
