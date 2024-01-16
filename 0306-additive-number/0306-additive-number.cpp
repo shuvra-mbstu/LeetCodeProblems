@@ -1,62 +1,35 @@
 class Solution {
 public:
     
-    bool helper(string& str, int i, vector<long long>& ans)
-    {
-        // base case, if we have reached the end of str and ans.size() >= 3, than return true
+    bool fun(string &num, int ind, vector<long> &res){
         
-        int n = str.size();
+        int len = num.size();
+        int res_l = res.size();
         
-        if(i == n && ans.size() >= 3)
-            return true;
+        if(ind == len && res_l> 2) return true;
         
-        // must take unsigned long long because long long is giving overflow
+        unsigned long long num1 = 0;
         
-        unsigned long long num = 0;
-        
-        for(int j = i; j < n; j++)
-        {
-            // calculate num
+        for(int i=ind; i<len; i++){
+            num1 = num1 * (long) 10 + (long) (num[i]-'0');
             
-            num = num * (long long) 10 + (long long) (str[j] - '0');
+                    if(num[ind]== '0' && i>ind) return false;
+
             
-            // this can't be include in ans
-            
-            if(num > LLONG_MAX)
-                return false;
-            
-            // handling the leading zero
-            
-            if(str[i] == '0' && j > i)
-                return false;
-            
-            // if ans array has less than 2 numbers then simply insert into ans array
-            
-            // if ans array has greater than equal 2 numbers then check if last two numbers sum up to num then insert into ans array
-            
-            if(ans.size() < 2 || ans.back() + ans[ans.size() - 2] == num)
-            {
-                ans.push_back(num);
+            if(res_l < 2 || res.back() + res[res_l-2] == num1){
+                res.push_back(num1);
                 
-                if(helper(str, j + 1, ans))
-                    return true;
+                if(fun(num, i+1, res)) return true;
                 
-                // if added num doesn't lead to ans then backtrack
+                res.pop_back();
                 
-                ans.pop_back();
             }
-            
         }
-        
         return false;
-    }    
+    }
     
-    bool isAdditiveNumber(string str) {
-        
-        int n = str.size();
-        
-        vector<long long> ans;
-        
-        return helper(str, 0, ans);
+    bool isAdditiveNumber(string num) {
+        vector<long> res;
+        return fun(num, 0, res);
     }
 };
