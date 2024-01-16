@@ -1,37 +1,34 @@
 class Solution {
 public:
     
-    bool fun(string &num, int ind, vector<long> &res){
+    bool fun(string &s, int ind, long long num1, long long num2, int x_time){
         
-        int len = num.size();
-        int res_l = res.size();
+        int len = s.size();
         
-        if(ind == len && res_l> 2) return true;
+        if(ind == len && x_time >2) return true;
         
-        unsigned long long num1 = 0;
+         long long cur_num = 0;
         
-        for(int i=ind; i<len; i++){
-            num1 = num1 * (long) 10 + (long) (num[i]-'0');
+        for(int i = ind; i<len; i++){
             
-            if(num1 > LLONG_MAX)return false;
+            if(cur_num>pow(10,17)) return false;
             
-            if(num[ind]== '0' && i>ind) return false;
-
+            cur_num = cur_num*10 + (s[i]-'0');
+                        
+            if(s[ind]=='0' && i > ind) return false;
             
-            if(res_l < 2 || res.back() + res[res_l-2] == num1){
-                res.push_back(num1);
+            if((x_time<2) || num1 + num2 == cur_num ){    
                 
-                if(fun(num, i+1, res)) return true;
-                
-                res.pop_back();
-                
+                if(fun(s,i+1, num2, cur_num, x_time+1)) return true;
             }
-        }
+            
+            }
+        
         return false;
-    }
+        }
     
     bool isAdditiveNumber(string num) {
-        vector<long> res;
-        return fun(num, 0, res);
+
+        return fun(num, 0, 0, 0, 0);
     }
 };
