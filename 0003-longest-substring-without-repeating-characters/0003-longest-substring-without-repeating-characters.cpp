@@ -6,14 +6,11 @@ public:
         int res=0, first=0;
         
         for(int i=0; i<s.size(); i++){
-            if(!tracking[s[i]]){
-                tracking[s[i]]=i+1;
-            }
-            else{
+            if(tracking[s[i]]){
                 first = max(first, tracking[s[i]]);
-                tracking[s[i]]=i+1;
-
             }
+            tracking[s[i]]=i+1;
+
             res = max(res, i-first+1);
             // cout<<res<<" "<<first<<" "<<i<<endl;
         }
