@@ -1,19 +1,22 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        unordered_map<char, int> last_index;
-        int left =0, res=0;
+        unordered_map<char, int> tracking;
+        
+        int res=0, first=0;
         
         for(int i=0; i<s.size(); i++){
-            
-            if(last_index.count(s[i])!=0){
-                left =max(left, last_index[s[i]]+1);
+            if(!tracking[s[i]]){
+                tracking[s[i]]=i+1;
             }
-            
-            last_index[s[i]]=i;
-            res = max(res, i-left+1);
+            else{
+                first = max(first, tracking[s[i]]);
+                tracking[s[i]]=i+1;
+
+            }
+            res = max(res, i-first+1);
+            // cout<<res<<" "<<first<<" "<<i<<endl;
         }
-        
         return res;
     }
 };
