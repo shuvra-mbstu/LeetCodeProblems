@@ -10,9 +10,12 @@ class Solution {
     }
     
     private int extendPalindrome(String s, int ind1, int ind2){
-        if(ind1>=0 && ind2 <s.length() && s.charAt(ind1)==s.charAt(ind2)){
-            return 1 + extendPalindrome(s, ind1-1, ind2+1);
+        int total =0;
+        while(ind1>=0 && ind2 <s.length() && s.charAt(ind1)==s.charAt(ind2)){
+            total++;
+            ind1--;
+            ind2++;
         }
-        return 0;
+        return total;
     }
 }
