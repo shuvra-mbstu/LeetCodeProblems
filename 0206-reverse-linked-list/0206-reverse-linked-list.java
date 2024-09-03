@@ -13,13 +13,12 @@ class Solution {
         ListNode curr = head, prev = null;
         if(head== null)return head;
         
-        while(curr.next != null){
+        while(curr != null){
             ListNode next = curr.next;
             curr.next = prev;
             prev = curr;
             curr = next;
         }
-        curr.next = prev;
-        return curr;
+        return prev;
     }
 }
