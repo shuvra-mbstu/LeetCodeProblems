@@ -1,14 +1,19 @@
 class Solution {
-    public int longestOnes(int[] A, int K) {
-        int zeroCount=0,start=0,res=0;
-        for(int end=0;end<A.length;end++){
-            if(A[end] == 0) zeroCount++;
-            while(zeroCount > K){
-                if(A[start] == 0) zeroCount--;
-                start++;
+    public int longestOnes(int[] nums, int k) {
+        int countk=k, left=0, max=0;
+        
+        for(int right=0 ;right<nums.length;right++){
+            if(nums[right]==0){
+                countk--;
             }
-            res=Math.max(res,end-start+1);
+            while(countk<0){ 
+                if(nums[left]==0)countk++;
+                
+                left++;
+            }
+            max = Math.max(right-left+1, max);
         }
-        return res;
+        // System.out.println("left = "+left+ " right = "+right+" count = "+sum);
+        return max;
     }
 }
