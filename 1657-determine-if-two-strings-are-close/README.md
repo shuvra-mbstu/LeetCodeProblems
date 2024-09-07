@@ -41,7 +41,7 @@ Apply Operation 1: "<u>a</u>c<u>b</u>" -&gt; "<u>b</u>c<u>a</u>"
 <strong>Output:</strong> true
 <strong>Explanation:</strong> You can attain word2 from word1 in 3 operations.
 Apply Operation 1: "ca<u>b</u>bb<u>a</u>" -&gt; "ca<u>a</u>bb<u>b</u>"
-<code>Apply Operation 2: "</code><u>c</u>aa<u>bbb</u>" -&gt; "<u>b</u>aa<u>ccc</u>"
+Apply Operation 2: "<u>c</u>aa<u>bbb</u>" -&gt; "<u>b</u>aa<u>ccc</u>"
 Apply Operation 2: "<u>baa</u>ccc" -&gt; "<u>abb</u>ccc"
 </pre>
 
