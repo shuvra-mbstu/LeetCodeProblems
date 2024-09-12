@@ -20,13 +20,9 @@ class Solution {
     int countGood(TreeNode root, int val){
         if(root == null) return 0;
         
-        int count=0;
-        if(root.val >= val){
-            count++;
-            val = root.val;
-        }
-        count += countGood(root.left, val) + countGood(root.right, val);
+        int max = Math.max(root.val, val);
+        int count = countGood(root.left, max) + countGood(root.right, max);
         
-        return count; 
+        return (root.val == max) ? count+1 : count; 
     }
 }
