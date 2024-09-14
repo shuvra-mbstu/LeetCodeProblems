@@ -7,6 +7,10 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+/*
+// Time Complexity O(N)
+// Space Complexity O(N)
+*/
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         Map<TreeNode, TreeNode> parents = new HashMap<>();
