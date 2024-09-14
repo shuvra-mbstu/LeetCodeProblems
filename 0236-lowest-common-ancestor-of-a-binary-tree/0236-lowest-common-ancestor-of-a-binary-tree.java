@@ -9,17 +9,34 @@
  */
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        return findLCA(root, p, q);
-    }
-    
-    TreeNode findLCA(TreeNode root, TreeNode p, TreeNode q){
-        if(root == null || root == p || root == q) return root;
+        Map<TreeNode, TreeNode> parents = new HashMap<>();
+        Stack<TreeNode> st = new Stack<>();
         
-        TreeNode left = findLCA(root.left, p, q);
-        TreeNode right = findLCA(root.right, p, q);
+        parents.put(root, null);
+        st.push(root);
         
-        if(left!=null && right!=null) return root;
+        while(!parents.containsKey(p) || !parents.containsKey(q)){
+            TreeNode currentNode = st.pop();
+            
+            if(currentNode.left != null){
+                parents.put(currentNode.left, currentNode);
+                st.push(currentNode.left);
+            }
+            
+            if(currentNode.right != null){
+                parents.put(currentNode.right, currentNode);
+                st.push(currentNode.right);
+            }
+        }
+        Set<TreeNode> ancestors = new HashSet<>();
+        while(p!=null){
+            ancestors.add(p);
+            p = parents.get(p);
+        }
         
-        return left!=null ? left : right;
+        while(!ancestors.contains(q)){
+            q = parents.get(q);
+        }
+        return q;
     }
 }
