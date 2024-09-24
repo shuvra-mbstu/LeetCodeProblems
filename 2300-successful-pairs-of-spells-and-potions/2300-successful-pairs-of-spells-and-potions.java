@@ -17,7 +17,7 @@ class Solution {
                 }
                 else right = mid-1;
             }
-            res[i] = potions.length - right-1;
+            res[i] = potions.length - left;
         }
         return res;
     }
