@@ -1,20 +1,18 @@
 class Solution {
-    public int rob(int[] nums) 
-    {
-        int n=nums.length;
-        if(n==1)
-        return nums[0];
-        if(n==0)
-        return 0;
-        int arr[]=new int[nums.length];
-        arr[0]=nums[0];
-        arr[1]=Math.max(nums[0],nums[1]);       
-        for(int i=2;i<nums.length;i++)
-        {
-            arr[i]=Math.max(arr[i-1],(arr[i-2]+nums[i]));
+    public int rob(int[] nums) { 
+        int[] res = new int[nums.length + 2];
+        for(int i=0; i<nums.length + 2; i++){
+            res[i] =-1;
         }
-        return arr[nums.length-1];
-
+        return houseSelection(0, nums, res);
+    }
+    int houseSelection(int current, int[] nums, int[] res){
+        if(current>= nums.length) return 0;
         
+        if(res[current]!= -1) return res[current];
+        
+        res[current] = Math.max(houseSelection(current+1, nums, res), houseSelection(current+2, nums, res)+nums[current]);
+        
+        return res[current];
     }
 }
