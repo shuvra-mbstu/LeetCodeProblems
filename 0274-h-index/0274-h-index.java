@@ -1,13 +1,20 @@
 class Solution {
     public int hIndex(int[] citations) {
-        Arrays.sort(citations);
+        int len = citations.length;
+        int[] frequency = new int[len+1];
         
-        int max = 0;
-        for(int i=0; i<citations.length; i++){
-            if(citations.length-i <= citations[i]){
-                max = Math.max(max, Math.min(citations.length-i, citations[i]));
-            }
+        for(int c : citations){
+            if(c>len)frequency[len]++;
+            else frequency[c]++;
         }
-        return max;
+        
+        int count=0;
+        
+        for(int i=len; i>=0; i--){
+            count += frequency[i];
+            
+            if(count >= i) return i;
+        }
+        return 0;
     }
 }
