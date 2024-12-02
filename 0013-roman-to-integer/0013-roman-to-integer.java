@@ -12,18 +12,13 @@ class Solution {
         
         int res = 0;
         int len = s.length();
-        for(int i=0; i<len; i++){
+        for(int i=1; i<len; i++){
             int val1 = map.get(s.charAt(i));
+            int val2 = map.get(s.charAt(i-1));
             
-            if(i+1<len && map.get(s.charAt(i+1))>val1){
-                res += (map.get(s.charAt(i+1)) - val1);
-                i++;
-            }
-            else {
-                res += val1;
-            }
+            res = val1> val2 ? res - val2 : res + val2; 
             // System.out.println(res);
         }
-        return res;
+        return res + map.get(s.charAt(len-1));
     }
 }
