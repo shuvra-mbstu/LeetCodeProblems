@@ -3,21 +3,16 @@ class Solution {
         
         if(strs.length < 2) return strs[0];
         
-        StringBuilder st = new StringBuilder(strs[0]);
-        int j=0, k=0;
+        String prefix = strs[0];
             
         for(int i=1; i< strs.length; i++){
-            j=0;
-            k=0;
-            StringBuilder ss = new StringBuilder();
-            
-            while(j<st.length() && k< strs[i].length() && st.charAt(j) == strs[i].charAt(k)){
-                ss.append(st.charAt(j));
-                j++;
-                k++;
+                        
+            while(strs[i].indexOf(prefix) !=0){
+                prefix = prefix.substring(0, prefix.length()-1);
+                
+                if(prefix.length() == 0) return "";
             }
-            st = ss;
         }
-        return st.toString();
+        return prefix.toString();
     }
 }
