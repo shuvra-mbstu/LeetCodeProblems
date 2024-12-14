@@ -1,19 +1,20 @@
 class Solution {
     public long findScore(int[] nums) {
-        int n = nums.length;
-        for (int i = 0; i < n - 1; ++i) 
-            if (nums[i+1] >= nums[i]) 
-                nums[++i] = 0; // sets element to 0 and skips it
+        int[] arr = new int[nums.length];
         
-        for (int i = n - 1; i > 0; --i) {
-            if (nums[i-1] == 0 || nums[i] == 0) continue; // check validity before comparison
-            if (nums[i-1] >= nums[i]) 
-                nums[--i] = 0;
+        for(int i=0; i<nums.length-1; i++){
+            if(nums[i]<=nums[i+1]){
+                nums[++i]=0;
+            }
+        }
+        long res=0;
+        for(int i=nums.length-1; i>0; i--){
+            res += nums[i];
+            if(nums[i]==0 || nums[i-1]==0)continue;
+            
+            if(nums[i]<=nums[i-1]) nums[--i]=0;
         }
         
-        long sum = 0;
-        for (int i : nums) sum += i;
-        
-        return sum;
-    }
+        return res+nums[0];
+    }   
 }
