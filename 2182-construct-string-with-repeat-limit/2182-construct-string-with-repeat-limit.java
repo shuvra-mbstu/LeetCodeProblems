@@ -1,34 +1,37 @@
 class Solution {
-    public String repeatLimitedString(String s, int rl) {
-        Map<Character, Integer> map = new HashMap<>();
-        for (char c : s.toCharArray()){
-            map.put(c, map.getOrDefault(c, 0) + 1);
-        }
+    public String repeatLimitedString(String s, int repeatLimit) {
+        Map<Character,Integer> mp = new HashMap<>();
         
-        PriorityQueue<Character> pq = new PriorityQueue<>((a, b) -> b - a);
-        pq.addAll(map.keySet());
-
-        StringBuilder sb = new StringBuilder();
-        while(pq.size() > 0){
-            char curr = pq.poll();
-
-            for(int i=0; i<rl && map.get(curr) >0 ; i++){
-                sb.append(curr);
-                map.put(curr, map.get(curr) - 1);
+        int len = s.length();
+        
+        for(int i=0; i<len; i++){
+            mp.put(s.charAt(i), 1+mp.getOrDefault(s.charAt(i), 0));
+        }
+        PriorityQueue<Character> pq = new PriorityQueue<>((a,b)->b-a);
+        
+        pq.addAll(mp.keySet());
+        
+        StringBuilder res = new StringBuilder();
+        
+        while(!pq.isEmpty()){
+            char entry = pq.poll();
+            
+            for(int i=0; i<repeatLimit && mp.get(entry)>0; i++){
+                res.append(entry);
+                mp.put(entry, mp.get(entry)-1);
             }
             
-            if(map.get(curr) > 0 && !pq.isEmpty()){
+            if(mp.get(entry)>0 && !pq.isEmpty()){
                 char next = pq.poll();
-                sb.append(next);
-                map.put(next, map.get(next) -1);
+                res.append(next);
+                mp.put(next, mp.get(next)-1);
                 
-                pq.add(curr);
-                if(map.get(next) > 0){
+                if(mp.get(next)>0){
                     pq.add(next);
                 }
+                pq.add(entry);
             }
         }
-
-        return sb.toString();
+        return res.toString();
     }
 }
