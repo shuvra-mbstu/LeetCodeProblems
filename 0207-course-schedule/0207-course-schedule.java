@@ -15,12 +15,18 @@ class Solution {
         // Step 3: Perform DFS using a stack for all unvisited nodes
         for (int i = 0; i < numCourses; i++) {
             if (visited[i] == 0) {
-                Stack<Integer> stk = new Stack<>();
-                stk.push(i);
+                if(!isValidGraph(graph, visited, i)) return false;
+            }
+        }
+        return true;
+    }
+    private Boolean isValidGraph(List<List<Integer>> graph, int[] visited, int ind){
+        Stack<Integer> stk = new Stack<>();
+                stk.push(ind);
 
                 while (!stk.isEmpty()) {
                     int current = stk.peek();
-                    System.out.println("current: " + current);
+                    // System.out.println("current: " + current);
 
                     if (visited[current] == 0) {
                         visited[current] = 1; // Mark as visiting
@@ -30,7 +36,7 @@ class Solution {
                                 stk.push(node);
                             } else if (visited[node] == 1) {
                                 // Cycle detected
-                                System.out.println("cycle detected at node: " + node);
+                                // System.out.println("cycle detected at node: " + node);
                                 return false;
                             }
                         }
@@ -39,8 +45,6 @@ class Solution {
                         visited[current] = 2; // Mark as fully processed
                     }
                 }
-            }
-        }
         return true;
     }
 }
